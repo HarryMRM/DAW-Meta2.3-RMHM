@@ -1,5 +1,5 @@
 const models = require('./models');
-const Op = require('Op');
+//const Op = require('Op');
 // Op.or
 async function getAllPersonas() {
     //models.sequelize.sync().then(() => {
@@ -36,6 +36,7 @@ async function test() {
             rfc: 'AAAA'
         }
     });
+
     let proyectoPri = await models.Proyecto.findByPk(1);
     let proyectoGortari = await models.Proyecto.findByPk(3);
     await proyectoPri.addDonadores(persona,{through: {cantidadDonada:10000.50}});

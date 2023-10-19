@@ -16,11 +16,8 @@ module.exports = (sequelize, DataTypes) => {
           as: "Donadores",
           foreignKey: "idProyecto",
           otherKey: "idPersona"
-        })
-      // models.Proyecto.belongsTo(models.Persona,
-      //   {
-      //     foreignKey: "idProyecto",
-      //   })
+        });
+      models.Proyecto.belongsTo(models.Persona,{foreignKey: "idDonatario"});
     }
   }
   Proyecto.init({
@@ -29,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique:true
     },
+    idDonatario: DataTypes.INTEGER,
     nombre: {
       type: DataTypes.STRING,
       allowNull: false

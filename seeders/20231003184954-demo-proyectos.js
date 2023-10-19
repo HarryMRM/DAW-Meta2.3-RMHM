@@ -6,6 +6,7 @@ module.exports = {
     await queryInterface.bulkInsert('proyectos', 
     [{
       idProyecto: "A1",
+      idDonatario: 1,
       nombre: "Proyecto PRI",
       imagen: "trucoteca.com",
       descripcion: "Adios a Morena",
@@ -14,6 +15,7 @@ module.exports = {
     },
     {
       idProyecto: "A2",
+      idDonatario: 2,
       nombre: "Proyecto Morena",
       imagen: "trucoteca.com",
       descripcion: "otro dato",
@@ -22,6 +24,7 @@ module.exports = {
     },
     {
       idProyecto: "A3",
+      idDonatario: 3,
       nombre: "Proyecto Gortari",
       imagen: "trucoteca.com",
       descripcion: "Mexico no tiene hambre",

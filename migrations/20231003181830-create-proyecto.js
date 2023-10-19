@@ -14,6 +14,13 @@ module.exports = {
         allowNull: false,
         unique:true
       },
+      idDonatario: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Personas',
+          key: 'id'
+        }
+      },
       nombre: {
         type: Sequelize.STRING,
         allowNull: false
