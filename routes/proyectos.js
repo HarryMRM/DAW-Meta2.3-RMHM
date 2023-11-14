@@ -15,15 +15,17 @@ function verificarRequest(req,res,next){
 const express = require('express');
 const router = express.Router();
 const proyectosController = require('../controladores/proyectos');
-router.get("/", proyectosController.getAll);
-router.get("/:id", proyectosController.getById);
-router.get("/:id/donadores", proyectosController.getById);
-router.get("/:id/donatarios", proyectosController.getById);
+const miPassport = require('../passport.js');
 
-router.post("/", verificarRequest, proyectosController.add);
+router.get("/", miPassport.authenticate('jwt',{ session: false}), proyectosController.getAll);
+router.get("/:id", miPassport.authenticate('jwt',{ session: false}), proyectosController.getById);
+router.get("/:id/donadores", miPassport.authenticate('jwt',{ session: false}), proyectosController.getById);
+router.get("/:id/donatarios", miPassport.authenticate('jwt',{ session: false}), proyectosController.getById);
 
-router.patch("/:id", verificarRequest, proyectosController.patch);
+router.post("/", miPassport.authenticate('jwt',{ session: false}), verificarRequest, proyectosController.add);
 
-router.delete("/", proyectosController.deleteAll);
-router.delete("/:id", proyectosController.deleteById);
+router.patch("/:id", miPassport.authenticate('jwt',{ session: false}), verificarRequest, proyectosController.patch);
+
+router.delete("/", miPassport.authenticate('jwt',{ session: false}), proyectosController.deleteAll);
+router.delete("/:id", miPassport.authenticate('jwt',{ session: false}), proyectosController.deleteById);
 module.exports = router;

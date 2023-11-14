@@ -15,13 +15,17 @@ function verificarRequest(req,res,next){
 const express = require('express');
 const router = express.Router();
 const personasController = require('../controladores/personas');
-router.get("/", personasController.getAll);
-router.get("/:id", personasController.getById);
 
-router.post("/", verificarRequest, personasController.add);
+const miPassport = require('../passport.js');
 
-router.patch("/:id", verificarRequest, personasController.patch);
+router.get('/', miPassport.authenticate('jwt',{ session: false}), personasController.getAll);
 
-router.delete("/", personasController.deleteAll);
-router.delete("/:id", personasController.deleteById);
+router.get("/:id", miPassport.authenticate('jwt',{ session: false}), personasController.getById);
+
+router.post("/", miPassport.authenticate('jwt',{ session: false}), verificarRequest, personasController.add);
+
+router.patch("/:id", miPassport.authenticate('jwt',{ session: false}), verificarRequest, personasController.patch);
+
+router.delete("/", miPassport.authenticate('jwt',{ session: false}), personasController.deleteAll);
+router.delete("/:id",  miPassport.authenticate('jwt',{ session: false}), personasController.deleteById);
 module.exports = router;
